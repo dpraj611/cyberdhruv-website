@@ -1,90 +1,73 @@
-<h1 align="center">
-  🕶️ Dhruv Prajapati  
-</h1>
+# React + TypeScript + Vite
 
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?size=22&duration=3000&pause=1000&color=F75C7E&center=true&vCenter=true&width=600&lines=Penetration+Tester;Red+Team+Operator;Bug+Bounty+Hunter;Secure+Web+Developer;Always+Breaking+Things+%F0%9F%94%A5" />
-</p>
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## 👋 About Me  
-Hey, I’m **Dhruv Prajapati** — the guy who breaks into systems (ethically, chill 😎) and then hardens them until they’re bulletproof.  
-When I’m not wrecking vulnerable apps, I’m shipping **modern & secure websites** that don’t just look good, but *survive attacks*.  
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-Currently leveling up in:  
-- Vulnerability research & exploit dev  
-- **CEH (in progress) → OSCP (final boss)**  
-- Bug bounties & CTFs (top scorer 🏆)  
-- Freelance secure web apps for clients  
+## React Compiler
 
-**Philosophy:** _If I can break it, I can make it unbreakable._  
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
----
+## Expanding the ESLint configuration
 
-## ⚡ Skills & Stats  
-📍 Penetration Testing — `75/100`  
-📍 Cybersecurity Fundamentals — `90/100`  
-📍 Python for Security & Automation — `80/100`  
-📍 Web Application Security — `78/100`  
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
----
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-## 🏅 Certifications  
-- Google Cybersecurity Professional Certificate  
-- TryHackMe Top 1%  
-- CEH (In Progress)  
-- OSCP (Aspirant)  
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
----
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-## 💻 Web Dev Hustle  
-Yes, I hack. But I also **build**.  
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-### 🚀 Featured Projects  
-🏥 **Zayn's Skin & Hair Clinic** — Mobile-first, Supabase auth, booking system, secure patient portal.  
-🌈 **Mini Moments Nursery** — London nursery site, parent portal, playful animations.  
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
----
-
-## 🛠️ Tech Stack  
-**Frontend:** React · TypeScript · Tailwind CSS  
-**Backend:** Node.js · Express · REST APIs  
-**Databases:** MongoDB · PostgreSQL · MySQL  
-**DevOps/Tools:** Vercel · Netlify · GitHub · Postman  
-
----
-
-## 🔐 Security Arsenal  
-
-### 🔴 Red Team  
-Nmap · Shodan · Amass · theHarvester · Subfinder  
-Burp Suite Pro · OWASP ZAP · Nuclei · Nikto · FFUF  
-Metasploit · SQLmap · CrackMapExec · Hydra · Impacket  
-Mimikatz · BloodHound · Empire · Sliver · Cobalt Strike  
-
-### 🔵 Blue Team  
-Wireshark · tcpdump · Netcat · Responder  
-Volatility 3 · Autopsy · Sleuth Kit · Velociraptor  
-Suricata · Zeek · OSQuery · Wazuh  
-
----
-
-## ⚙️ Workflow  
-1. 🕵️ Recon & Discovery  
-2. 🏗️ Architecture & Planning  
-3. 💻 Development (clean & secure)  
-4. 🔨 Testing (yes, I try to break it again)  
-5. 🚀 Deployment + Monitoring  
-
----
-
-## 📬 Connect with Me  
-Wanna collab? Need a system tested (legally)? Or just wanna geek out over infosec tools?  
-
-🌐 [cyberdhruv.vercel.app](https://cyberdhruv.vercel.app)  
-📧 [praj.dhruv6@gmail.com](mailto:praj.dhruv6@gmail.com)  
-🐦 [X / Twitter → @cyberdhruv](https://x.com/cyberdhruv)  
-💼 [LinkedIn → dpraj](https://linkedin.com/in/dpraj)  
-
----
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
